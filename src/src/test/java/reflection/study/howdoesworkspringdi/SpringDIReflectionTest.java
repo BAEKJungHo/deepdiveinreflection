@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("스프링 DI 리플렉션 테스트")
 @SpringBootTest
-public class SpringDIReflectionTest {
+class SpringDIReflectionTest {
 
     @Autowired
     UserService userService;

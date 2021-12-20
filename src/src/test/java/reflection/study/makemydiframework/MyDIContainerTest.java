@@ -10,7 +10,7 @@ import reflection.study.makemydiframework.code.UserService;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("나만의 DI 프레임워크 만들기")
-public class MyDIContainerTest {
+class MyDIContainerTest {
 
     @DisplayName("ContainerService 에서 UserRepository Object 가져오기 테스트 : 성공")
     @Test

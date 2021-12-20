@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @Slf4j
 @DisplayName("리플렉션 API : 클래스 정보 조회 테스트")
-public class ReflectionAPIFindClassInformationTest {
+class ReflectionAPIFindClassInformationTest {
 
     @DisplayName("클래스가 로딩만 되면 Class<T> 타입의 인스턴스가 생성된다.")
     @Test

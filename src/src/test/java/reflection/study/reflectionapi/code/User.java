@@ -2,8 +2,10 @@ package reflection.study.reflectionapi.code;
 
 import org.springframework.lang.NonNull;
 
+@Admin("User JungHo")
 public class User {
 
+    @Admin("FIRSTNAME")
     private String firstName = "JungHo";
     private static String lastName = "BAEK";
     private static final String fullName = "BAEK JungHo";
