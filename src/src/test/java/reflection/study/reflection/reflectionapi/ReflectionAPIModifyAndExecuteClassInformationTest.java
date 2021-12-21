@@ -76,5 +76,4 @@ public class ReflectionAPIModifyAndExecuteClassInformationTest {
         int invokeResult = (int) method.invoke(team, 1 , 2);
         assertEquals(invokeResult, 3);
     }
-
 }
