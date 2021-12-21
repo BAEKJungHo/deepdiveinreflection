@@ -2,8 +2,8 @@
 
 ## 🎯 Table of Contents
 
-- [Java Reflection](https://github.com/BAEKJungHo/java-reflection/blob/main/contents/Java%20Reflection.md)
-- [스프링 DI 가 동작하는 원리]
+- [Java Reflection](https://github.com/BAEKJungHo/java-reflection/blob/main/contents/01.%20Java%20Reflection.md)
+- [스프링 DI 가 동작하는 원리]()
 - Proxy Pattern
 - JDK Dynamic Proxy
 - CGLIB
