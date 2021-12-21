@@ -137,7 +137,7 @@ class ReflectionAPIFindClassInformationTest {
     private void useFQCN() throws ClassNotFoundException {
         // FQCN : Full Qualified Class Name (Package 명을 포함한 클래스 이름)
         // ClassNotFoundException 발생 가능성이 있음
-        final String FQCN = "reflection.study.reflectionapi.code.User";
+        final String FQCN = "reflection.study.reflection.reflectionapi.code.User";
         Class<?> userClass = Class.forName(FQCN);
     }
 }
