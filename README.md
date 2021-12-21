@@ -1,5 +1,15 @@
 # Java Reflection
 
+## 🔖 Table of Contents
+
+- Java Reflection
+- 스프링 DI 가 동작하는 원리
+- Proxy Pattern
+- JDK Dynamic Proxy
+- CGLIB
+- 스프링 데이터 JPA 가 동작하는 원리
+- 스프링의 ProxyFactory
+
 ## References
 
 - [더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation/dashboard)
