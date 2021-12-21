@@ -1,11 +1,11 @@
-package reflection.study.makemydiframework;
+package reflection.study.reflection.makemydiframework;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import reflection.study.makemydiframework.code.ContainerService;
-import reflection.study.makemydiframework.code.ContainerService2;
-import reflection.study.makemydiframework.code.UserRepository;
-import reflection.study.makemydiframework.code.UserService;
+import reflection.study.reflection.makemydiframework.code.ContainerService;
+import reflection.study.reflection.makemydiframework.code.ContainerService2;
+import reflection.study.reflection.makemydiframework.code.UserRepository;
+import reflection.study.reflection.makemydiframework.code.UserService;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

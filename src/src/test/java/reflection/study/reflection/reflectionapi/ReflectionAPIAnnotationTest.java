@@ -1,13 +1,13 @@
-package reflection.study.reflectionapi;
+package reflection.study.reflection.reflectionapi;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
-import reflection.study.reflectionapi.code.Admin;
-import reflection.study.reflectionapi.code.CommonUser;
-import reflection.study.reflectionapi.code.User;
+import reflection.study.reflection.reflectionapi.code.Admin;
+import reflection.study.reflection.reflectionapi.code.CommonUser;
+import reflection.study.reflection.reflectionapi.code.User;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

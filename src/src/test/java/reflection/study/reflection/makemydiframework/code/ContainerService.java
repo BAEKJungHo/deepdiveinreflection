@@ -1,4 +1,4 @@
-package reflection.study.makemydiframework.code;
+package reflection.study.reflection.makemydiframework.code;
 
 import java.lang.reflect.InvocationTargetException;
 

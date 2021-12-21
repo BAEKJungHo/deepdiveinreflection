@@ -1,4 +1,4 @@
-package reflection.study.reflectionapi.code;
+package reflection.study.reflection.reflectionapi.code;
 
 import java.lang.annotation.*;
 
@@ -9,10 +9,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 @Inherited // 상속 가능
-public @interface SubAdmin {
+public @interface Admin {
     String value(); // 값을 하나만 받을 때 유용 Ex. @Admin("User")
 
-    String name() default "SUB ADMIN"; // Ex. @Admin(name = "Test")
+    String name() default "Jungho"; // Ex. @Admin(name = "Test")
 
     int serialNumber() default 111111;
 }

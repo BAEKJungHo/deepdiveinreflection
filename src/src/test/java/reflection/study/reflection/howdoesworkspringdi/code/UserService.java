@@ -1,4 +1,4 @@
-package reflection.study.howdoesworkspringdi.code;
+package reflection.study.reflection.howdoesworkspringdi.code;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

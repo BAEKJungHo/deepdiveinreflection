@@ -1,4 +1,4 @@
-package reflection.study.reflectionapi.code;
+package reflection.study.reflection.reflectionapi.code;
 
 import org.springframework.lang.NonNull;
 
