@@ -1,6 +1,5 @@
 package reflection.study.reflection.classloader;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import reflection.study.reflection.classloader.code.User;
