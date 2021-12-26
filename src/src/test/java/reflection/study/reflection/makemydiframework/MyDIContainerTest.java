@@ -32,6 +32,6 @@ class MyDIContainerTest {
     void getUserServiceObject_Success() throws Exception {
         UserService userService = ContainerService2.getObject(UserService.class);
         assertNotNull(userService);
-        assertNotNull(userService.userRepository); // 여기서 NPE 로 실패
+        assertNotNull(userService.userRepository);
     }
 }
