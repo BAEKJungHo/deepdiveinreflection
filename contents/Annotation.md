@@ -259,7 +259,111 @@ RetentionPolicy 에서 `RUNTIME` 주석 부분을 보자. RUNTIME 주석의 핵�
 
 > 런타임에 VM에 의해 유지되므로 반사적으로 읽을 수 있습니다.
 
-그러면 다시 위로 올라가서, [비지니스 로직을 방해하지 않고, 필요한 정보를 제공할 수 있다.](#) 에 있는 @Resource 어노테이션을 보자. RetentionPolicy 가 RUNTIME 으로 되어있는 것을 볼 수 있다.
+그러면 다시 위로 올라가서, [비지니스 로직을 방해하지 않고, 필요한 정보를 제공할 수 있다.](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Annotation.md#%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EB%A1%9C%EC%A7%81%EC%9D%84-%EB%B0%A9%ED%95%B4%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%ED%95%84%EC%9A%94%ED%95%9C-%EC%A0%95%EB%B3%B4%EB%A5%BC-%EC%A0%9C%EA%B3%B5%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8B%A4) 에 있는 @Resource 어노테이션을 보자. RetentionPolicy 가 RUNTIME 으로 되어있는 것을 볼 수 있다. 따라서, @Resource 어노테이션을 필드에 사용하면 Reflection 을 통한 DI 가 가능한 것이다.
+
+#### @Getter, @Setter, @Override 의 RetentionPolicy ?
+
+@Getter, @Setter, @Override 의 RetentionPolicy 가 무엇으로 되어있을지 생각해 보자.
+
+정답은 `SROUCE`로 되어있다. 
+
+테스트를 위해 User 라는 클래스를 생성하고 컴파일 해보자.
+
+```
+@Getter @Setter
+public class User {
+
+    private Long id;
+}
+```
+
+컴파일 결과는 아래와 같다.
+
+```java
+public class User {
+    private Long id;
+
+    public User() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+}
+```
+
+RetentionPolicy 가 `SOURCE` 로 되어있어서 컴파일될 때 어노테이션은 사라지고, 어노테이션 정보를 가지고 실제 코드를 생성해준다.
+
+### @Target
+
+```java
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Target {
+    /**
+     * Returns an array of the kinds of elements an annotation type
+     * can be applied to.
+     * @return an array of the kinds of elements an annotation type
+     * can be applied to
+     */
+    ElementType[] value();
+}
+```
+
+- __@Target__
+    - 어노테이션을 적용할 대상을 지정한다.
+    - ElementType enum 에 지정되어있는 타입 중 하나 이상을 선택할 수 있다.
+
+```java
+public enum ElementType {
+    /** Class, interface (including annotation type), or enum declaration */
+    TYPE,
+
+    /** Field declaration (includes enum constants) */
+    FIELD,
+
+    /** Method declaration */
+    METHOD,
+
+    /** Formal parameter declaration */
+    PARAMETER,
+
+    /** Constructor declaration */
+    CONSTRUCTOR,
+
+    /** Local variable declaration */
+    LOCAL_VARIABLE,
+
+    /** Annotation type declaration */
+    ANNOTATION_TYPE,
+
+    /** Package declaration */
+    PACKAGE,
+
+    /**
+     * Type parameter declaration
+     * @since 1.8
+     */
+    TYPE_PARAMETER,
+
+    /**
+     * Use of a type
+     * @since 1.8
+     */
+    TYPE_USE,
+
+    /**
+     * Module declaration.
+     * @since 9
+     */
+    MODULE
+}
+```
 
 ## Referneces
 
