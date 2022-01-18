@@ -367,6 +367,75 @@ public enum ElementType {
 }
 ```
 
+### @Documented
+
+@Documented 의 주석 일부를 보면 다음과 같다.
+
+```java
+/**
+ * Concretely, if an annotation type is annotated with {@code
+ * Documented}, by default a tool like javadoc will display
+ * annotations of that type in its output while annotations of
+ * annotation types without {@code Documented} will not be displayed.
+ */
+```
+
+- __@Documented__
+    - @Documented 를 사용하면 javadoc tool 을 사용하여 문서를 생성하면, 문서에 어노테이션 정보까지 같이 보여진다.
+
+### @Repeatable
+
+```java
+/**
+ * The annotation type {@code java.lang.annotation.Repeatable} is
+ * used to indicate that the annotation type whose declaration it
+ * (meta-)annotates is <em>repeatable</em>. The value of
+ * {@code @Repeatable} indicates the <em>containing annotation
+ * type</em> for the repeatable annotation type.
+ *
+ * @since 1.8
+ * @jls 9.6.3 Repeatable Annotation Types
+ * @jls 9.7.5 Multiple Annotations of the Same Type
+ */
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Repeatable {
+    /**
+     * Indicates the <em>containing annotation type</em> for the
+     * repeatable annotation type.
+     * @return the containing annotation type
+     */
+    Class<? extends Annotation> value();
+}
+```
+
+- __@Repeatable__
+    - 반복해서 붙일 수 있는 어노테이션을 정의할 때 사용
+    - 반복해서 표현할 어노테이션을 묶을 `컨테이너 어노테이션`도 함께 정의해서 사용해야 함
+        - @ComponentScans 가 컨테이너 어노테이션에 해당된다.
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Documented
+public @interface ComponentScans {
+
+	ComponentScan[] value();
+
+}
+```
+
+따라서, @ComponentScan 은 `@Repeatable` 어노테이션 덕분에 아래와 같은 형태로도 사용이 가능하다.
+
+```java
+@ComponentScan(basePackages = "hello.test")
+@ComponentScan(basePackages = "hello.src")
+public class AppConfig {
+}
+```
+
+
 ## Referneces
 
 - https://www.nextree.co.kr/p5864/
