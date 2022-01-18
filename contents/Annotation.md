@@ -60,7 +60,7 @@ Document 에 나와있는 내용을 읽어보자.
 
 ## 비지니스 로직을 방해하지 않고, 필요한 정보를 제공할 수 있다.
 
-![IMAGES](./images/annotationwithreflection.png)
+![IMAGES](./images/annotationwithreflection2.png)
 
 - 비지니스 로직을 방해하지 않고, 필요한 정보를 제공할 수 있다. 
     - 스프링 DI 를 생각하면 된다.
