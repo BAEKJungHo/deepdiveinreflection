@@ -271,7 +271,7 @@ RetentionPolicy 에서 `RUNTIME` 주석 부분을 보자. RUNTIME 주석의 핵�
 
 @Getter, @Setter, @Override 의 RetentionPolicy 가 무엇으로 되어있을지 생각해 보자.
 
-정답은 `SROUCE`로 되어있다. 
+정답은 `SOURCE`로 되어있다. 
 
 테스트를 위해 User 라는 클래스를 생성하고 컴파일 해보자.
 
