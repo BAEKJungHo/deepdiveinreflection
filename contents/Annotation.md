@@ -429,7 +429,7 @@ public @interface ComponentScans {
 }
 ```
 
-따라서, @ComponentScan 은 `@Repeatable` 어노테이션 덕분에 아래와 같은 형태로도 사용이 가능하다.
+@ComponentScan 은 `@Repeatable` 어노테이션 덕분에 아래와 같은 형태로도 사용이 가능하다.
 
 ```java
 @ComponentScan(basePackages = "hello.test")
