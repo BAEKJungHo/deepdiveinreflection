@@ -119,9 +119,11 @@ public class UserService {
 - __@Retention__
     - 어노테이션이 유지되는 범위를 지정하는데 사용한다.
 
+> [Meta Annotations](https://en.wikibooks.org/wiki/Java_Programming/Annotations/Meta-Annotations)
+>
 > @Target, @Documented, @Inherited, @Retention, @Repeatable 은 메타 어노테이션이라고도 부른다. 메타 어노테이션을 활용하여 어노테이션을 커스터마이징 할 수 있다.
 >
-> 메타데이터란 어플리케이션이 처리해야 할 데이터가 아니라, 컴파일 타임과 런타임에서 코드를 어떻게 컴파일하고 처리할 것인지 알려주는 정보이다.
+> 메타 데이터란 어플리케이션이 처리해야 할 데이터가 아니라, 컴파일 타임과 런타임에서 코드를 어떻게 컴파일하고 처리할 것인지 알려주는 정보이다.
 
 ### @Override
 
@@ -424,7 +426,6 @@ public @interface Repeatable {
 public @interface ComponentScans {
 
 	ComponentScan[] value();
-
 }
 ```
 
@@ -437,6 +438,74 @@ public class AppConfig {
 }
 ```
 
+### @Inherited
+
+```java
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Inherited {
+}
+```
+
+- __@Inherited__
+    - 해당 어노테이션이 붙어있는 어노테이션을 클래스에 적용하면, 하위 클래스에서도 그 어노테이션이 적용된다.
+
+@Inherited 를 적용한 Dto 어노테이션과, @Inherited 가 없는 Dao 어노테이션을 만들어서 테스트 해 보자.
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Inherited
+public @interface Dto {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Dao {
+}
+```
+
+다음으로 User 와 Team 을 아래와 같이 구성하자.
+
+```java
+@Dto
+@Dao
+public class User {
+}
+
+public class Team extends User {
+}
+```
+
+테스트 코드와 결과는 다음과 같다.
+
+```java
+@Slf4j
+class AnnotationTest {
+
+    @Test
+    void inheritedTest() {
+        Class<User> userClass = User.class;
+
+        // User Dto Annotation = @reflection.study.annotation.code.Dto()
+        log.info("User Dto Annotation = {}", userClass.getAnnotation(Dto.class));
+
+        // User Dto Annotation = @reflection.study.annotation.code.Dao()
+        log.info("User Dto Annotation = {}", userClass.getAnnotation(Dao.class));
+
+        Class<Team> teamClass = Team.class;
+
+        // User Dto Annotation = @reflection.study.annotation.code.Dto()
+        log.info("User Dto Annotation = {}", teamClass.getAnnotation(Dto.class));
+
+        // User Dto Annotation = null
+        log.info("User Dto Annotation = {}", teamClass.getAnnotation(Dao.class));
+    }
+}
+```
+
+누군가 어노테이션은 상속 가능하냐라고 물으면, `@Inherited` 가 적용되었는지에 따라 답변하면 될 것 같다.
 
 ## Referneces
 
