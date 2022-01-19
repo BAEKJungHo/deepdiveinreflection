@@ -209,7 +209,7 @@ RetentionPolicy 에서 `RUNTIME` 주석 부분을 보자. RUNTIME 주석의 핵�
 
 > 런타임에 VM에 의해 유지되므로 반사적으로 읽을 수 있습니다.
 
-그러면 다시 위로 올라가서, [비지니스 로직을 방해하지 않고, 필요한 정보를 제공할 수 있다.](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Annotation.md#%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EB%A1%9C%EC%A7%81%EC%9D%84-%EB%B0%A9%ED%95%B4%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%ED%95%84%EC%9A%94%ED%95%9C-%EC%A0%95%EB%B3%B4%EB%A5%BC-%EC%A0%9C%EA%B3%B5%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8B%A4) 에 있는 @Resource 어노테이션을 보자. RetentionPolicy 가 RUNTIME 으로 되어있는 것을 볼 수 있다. 따라서, @Resource 어노테이션을 필드에 사용하면 Reflection 을 통한 DI 가 가능한 것이다.
+그러면 다시 위로 올라가서, [어노테이션을 런타임에 반사적으로 읽기](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Annotation.md#%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EC%9D%84-%EB%9F%B0%ED%83%80%EC%9E%84%EC%97%90-%EB%B0%98%EC%82%AC%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%9D%BD%EA%B8%B0) 에 있는 @Resource 어노테이션을 보자. RetentionPolicy 가 RUNTIME 으로 되어있는 것을 볼 수 있다. 따라서, @Resource 어노테이션을 필드에 사용하면 Reflection 을 통한 DI 가 가능한 것이다.
 
 #### @Getter, @Setter, @Override 의 RetentionPolicy ?
 
