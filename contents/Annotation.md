@@ -232,6 +232,23 @@ static <T> List<T> flatten(List<? extends T>... lists) {
 }
 ```
 
+### @FunctioanlInterface
+
+Conceptually, a functional interface has exactly one abstract method. 따라서, FunctionalInteface 를 작성할 때 두 개 이상의 추상 메서드가 정의되지 않도록 `컴파일러가 체킹` 해준다.
+
+```java
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface FunctionalInterface {}
+```
+
+아니 근데 왜.. RetentionPolicy 가 Runtime 으로 되어있을까? [StackOverflow. Why does FunctionalInterface have a runtime retetion](https://stackoverflow.com/questions/27121563/why-does-functionalinterface-have-a-runtime-retention) 답변을 참고하면 다음과 같다.
+
+예를 들어 API를 만들고 클래스를 미리 컴파일된 jar로 제공하면 컴파일러에서 더 이상 정보를 사용할 수 없기 때문에 "소스"로는 충분하지 않다.
+
+리플렉션을 사용하여 주석을 찾고 경고도 표시해야 하는 스크립팅 엔진과 같이 런타임에 클래스에 대해 "컴파일"하는 그런 종류의 컴파일러를 지원하려는 경우 "클래스"도 충분하지 않을 것이라고 생각한다.
+
 ## @ComponentScan 을 통한 메타 어노테이션 알아보기
 
 ```java
