@@ -104,150 +104,34 @@ public class UserService {
 
 ## 표준 어노테이션
 
-- __@Override__
-    - 컴파일러에게 오버라이딩하는 메서드임을 알린다.
-- __@Deprecated__
-    - 앞으로 사용하지 말 것을 권장하는 대상에게 붙인다.
-- __@SuppressWarnings__
-    - 컴파일러의 특정 경고 메시지가 나타나지 않게 해준다.
-    - Effective Java Item 27
-- __@SafeVarargs__
-    - 제네릭 타입의 가변인자에 사용한다. (JDK 1.7)
-    - Effective Java Item 32
-- __@FunctionalInterface__
-    - 함수형 인터페이스라는 것을 알린다. (JDK 1.8)
-- __@Native__
-    - native 메서드에서 참조되는 상수 앞에 붙인다.
-- __@Target__
-    - 어노테이션이 적용 가능한 대상을 지정하는데 사용한다.
-- __@Documented__
-    - 어노테이션 정보가 javadoc 으로 작성된 문서에 포함되게 한다.
-- __@Inherited__
-    - 어노테이션이 하위 클래스에게 상속 되도록 한다.
-- __@Retention__
-    - 어노테이션이 유지되는 범위를 지정하는데 사용한다.
+- __내장 어노테이션__
+	- __@Override__
+	    - 컴파일러에게 오버라이딩하는 메서드임을 알린다.
+	- __@Deprecated__
+	    - 앞으로 사용하지 말 것을 권장하는 대상에게 붙인다.
+	- __@SuppressWarnings__
+	    - 컴파일러의 특정 경고 메시지가 나타나지 않게 해준다.
+	    - Effective Java Item 27
+	- __@SafeVarargs__
+	    - 제네릭 타입의 가변인자에 사용한다. (JDK 1.7)
+	    - Effective Java Item 32
+	- __@FunctionalInterface__
+	    - 함수형 인터페이스라는 것을 알린다. (JDK 1.8)
+- __메타 어노테이션__
+	- __@Target__
+	    - 어노테이션이 적용 가능한 대상을 지정하는데 사용한다.
+	- __@Documented__
+	    - 어노테이션 정보가 javadoc 으로 작성된 문서에 포함되게 한다.
+	- __@Inherited__
+	    - 어노테이션이 하위 클래스에게 상속 되도록 한다.
+	- __@Retention__
+	    - 어노테이션이 유지되는 범위를 지정하는데 사용한다.
 
 > [Meta Annotations](https://en.wikibooks.org/wiki/Java_Programming/Annotations/Meta-Annotations)
 >
 > @Target, @Documented, @Inherited, @Retention, @Repeatable 은 메타 어노테이션이라고도 부른다. 메타 어노테이션을 활용하여 어노테이션을 커스터마이징 할 수 있다.
 >
 > 메타 데이터란 어플리케이션이 처리해야 할 데이터가 아니라, 컴파일 타임과 런타임에서 코드를 어떻게 컴파일하고 처리할 것인지 알려주는 정보이다.
-
-### @Override
-
-슈퍼 클래스의 기능을 오버라이딩할 때 `@Override` 를 작성하면 컴파일 타임에 오탈자를 확인할 수 있다.
-
-```java
-@Slf4j
-public class SuperClass {
-    
-    public void run() {
-        log.info("Run by SuperClass");
-    }
-}
-
-@Slf4j
-public class SubClass extends SuperClass {
-
-    // java: method does not override or implement a method from a supertype
-    @Override
-    public void run1() {
-        log.info("Run by SubClass");
-    }
-
-    /**
-     * 오탈자를 입력했지만 @Override 를 적용하지 않아서 
-     * 하위 클래스에서 만든 새로운 메서드라고 인식한다.
-     */
-    public void run2() {
-    }
-}
-```
-
-### @Deprecated
-
-@Dprecated 는 앞으로 사용하지 말 것을 권장하는 필드나 메서드에 붙인다.
-
-Date 클래스를 예로 들어보자. Date 에 들어있는 대부분의 메서드들은 `@Deprecated` 되었다.
-주석을 읽어보면 Date 대신 Calendar 를 권장하는 것 같다.
-
-
-```java
-/**
-    * Returns the day of the month represented by this {@code Date} object.
-    * The value returned is between {@code 1} and {@code 31}
-    * representing the day of the month that contains or begins with the
-    * instant in time represented by this {@code Date} object, as
-    * interpreted in the local time zone.
-    *
-    * @return  the day of the month represented by this date.
-    * @see     java.util.Calendar
-    * @deprecated As of JDK version 1.1,
-    * replaced by {@code Calendar.get(Calendar.DAY_OF_MONTH)}.
-    */
-@Deprecated
-public int getDate() {
-    return normalize().getDayOfMonth();
-}
-```
-
-하지만 @Deprecated 가 붙어있다고 해당 메서드를 사용 할 수 없다는 것은 아니다.
-
-그럼에도 불구하고 @Deprecated 를 사용하는 이유는 무엇일까?
-
-자바는 `하위 호환성`을 중요하게 여기는데, 과거에 getDate() 를 사용하여 작성된 프로그램이 상위 JDK 버전에서 동작이 안된다면 에러가 발생할 것이다. 따라서, 상위 버전에서 하위 버전에서 사용했던 메서드 등이 Deprecated 되었더라도, 상위 버전에서 정상적으로 동작할 수 있도록 해주며, 상위 버전에서는 더 이상 사용하지 말라는 의미를 담고있다고 보면 된다.
-
-### @SuppressWarnings 
-
-비검사 형변환 경고와 같은 `비검사 경고`를 사용하지 않도록 @SuppressWarnings 를 사용하여 설정할 수 있다.
-
-__중요한 점은, @SuppressWarnings("unchecked") 를 사용할 때, 그 경고를 무시해도 안전한 이유를 항상 주석으로 남겨야한다.__
-
-```java
-public String methodA() {
-    // @SupressWarnings 를 사용한 이유
-    @SuppressWarnings("unchecked")
-    // 코드 
-}
-```
-
-비검사 경고는 `ClassCastException` 을 일으킬 수 있는 가능성을 포함하고 있기 때문에, 가급적 비검사 경고를 제외해야 하며, 방법을 찾지 못할 때에만 @SuppressWarnings("unchecked") 를 사용하는 것이 좋다.
-
-### @Safevarargs
-
-- __@Safevarargs__
-	- 자바 7 전에는 제네릭 가변인수 메서드의 작성자가 호출자 쪽에서 발생하는 경고에 대해서 해줄 수 있는 일이 없었다.
-	- 따라서, 경고를 그냥 두거나 @SuppressWarnings("unchecked")  를 추가하여 경고를 숨기곤 했다.
-	- @SafeVarargs 는 제네릭 타입의 가변인자를 사용할 때 나타나는 경고를 숨길 수 있다.
-	- `Effective Java Item32` 에서는 제네릭이나 매개변수화 타입의 varargs 매개변수를 받는 모든 메서드에 `@SafeVarargs` 를 추가하라고 나와있다.
-
-```java
-@SafeVarargs
-static <T> List<T> flatten(List<? extends T>... lists) {
-	List<T> result = new ArrayList<>();
-	for (List<? extends T> list : lists) {
-		result.addAll(list);
-	}
-	return result;
-}
-```
-
-### @FunctioanlInterface
-
-Conceptually, a functional interface has exactly one abstract method. 따라서, FunctionalInteface 를 작성할 때 두 개 이상의 추상 메서드가 정의되지 않도록 `컴파일러가 체킹` 해준다.
-
-```java
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface FunctionalInterface {}
-```
-
-아니 근데 왜.. RetentionPolicy 가 Runtime 으로 되어있을까? [StackOverflow. Why does FunctionalInterface have a runtime retetion](https://stackoverflow.com/questions/27121563/why-does-functionalinterface-have-a-runtime-retention) 답변을 참고하면 다음과 같다.
-
-예를 들어 API를 만들고 클래스를 미리 컴파일된 jar로 제공하면 컴파일러에서 더 이상 정보를 사용할 수 없기 때문에 "소스"로는 충분하지 않다.
-
-리플렉션을 사용하여 주석을 찾고 경고도 표시해야 하는 스크립팅 엔진과 같이 런타임에 클래스에 대해 "컴파일"하는 그런 종류의 컴파일러를 지원하려는 경우 "클래스"도 충분하지 않을 것이라고 생각한다.
 
 ## @ComponentScan 을 통한 메타 어노테이션 알아보기
 
@@ -566,6 +450,126 @@ class AnnotationTest {
 ```
 
 누군가 어노테이션은 상속 가능하냐라고 물으면, `@Inherited` 가 적용되었는지에 따라 답변하면 될 것 같다.
+
+## 내장 어노테이션
+
+### @Override
+
+슈퍼 클래스의 기능을 오버라이딩할 때 `@Override` 를 작성하면 컴파일 타임에 오탈자를 확인할 수 있다.
+
+```java
+@Slf4j
+public class SuperClass {
+    
+    public void run() {
+        log.info("Run by SuperClass");
+    }
+}
+
+@Slf4j
+public class SubClass extends SuperClass {
+
+    // java: method does not override or implement a method from a supertype
+    @Override
+    public void run1() {
+        log.info("Run by SubClass");
+    }
+
+    /**
+     * 오탈자를 입력했지만 @Override 를 적용하지 않아서 
+     * 하위 클래스에서 만든 새로운 메서드라고 인식한다.
+     */
+    public void run2() {
+    }
+}
+```
+
+### @Deprecated
+
+@Dprecated 는 앞으로 사용하지 말 것을 권장하는 필드나 메서드에 붙인다.
+
+Date 클래스를 예로 들어보자. Date 에 들어있는 대부분의 메서드들은 `@Deprecated` 되었다.
+주석을 읽어보면 Date 대신 Calendar 를 권장하는 것 같다.
+
+
+```java
+/**
+    * Returns the day of the month represented by this {@code Date} object.
+    * The value returned is between {@code 1} and {@code 31}
+    * representing the day of the month that contains or begins with the
+    * instant in time represented by this {@code Date} object, as
+    * interpreted in the local time zone.
+    *
+    * @return  the day of the month represented by this date.
+    * @see     java.util.Calendar
+    * @deprecated As of JDK version 1.1,
+    * replaced by {@code Calendar.get(Calendar.DAY_OF_MONTH)}.
+    */
+@Deprecated
+public int getDate() {
+    return normalize().getDayOfMonth();
+}
+```
+
+하지만 @Deprecated 가 붙어있다고 해당 메서드를 사용 할 수 없다는 것은 아니다.
+
+그럼에도 불구하고 @Deprecated 를 사용하는 이유는 무엇일까?
+
+자바는 `하위 호환성`을 중요하게 여기는데, 과거에 getDate() 를 사용하여 작성된 프로그램이 상위 JDK 버전에서 동작이 안된다면 에러가 발생할 것이다. 따라서, 상위 버전에서 하위 버전에서 사용했던 메서드 등이 Deprecated 되었더라도, 상위 버전에서 정상적으로 동작할 수 있도록 해주며, 상위 버전에서는 더 이상 사용하지 말라는 의미를 담고있다고 보면 된다.
+
+### @SuppressWarnings 
+
+비검사 형변환 경고와 같은 `비검사 경고`를 사용하지 않도록 @SuppressWarnings 를 사용하여 설정할 수 있다.
+
+__중요한 점은, @SuppressWarnings("unchecked") 를 사용할 때, 그 경고를 무시해도 안전한 이유를 항상 주석으로 남겨야한다.__
+
+```java
+public String methodA() {
+    // @SupressWarnings 를 사용한 이유
+    @SuppressWarnings("unchecked")
+    // 코드 
+}
+```
+
+비검사 경고는 `ClassCastException` 을 일으킬 수 있는 가능성을 포함하고 있기 때문에, 가급적 비검사 경고를 제외해야 하며, 방법을 찾지 못할 때에만 @SuppressWarnings("unchecked") 를 사용하는 것이 좋다.
+
+### @Safevarargs
+
+- __@Safevarargs__
+	- 자바 7 전에는 제네릭 가변인수 메서드의 작성자가 호출자 쪽에서 발생하는 경고에 대해서 해줄 수 있는 일이 없었다.
+	- 따라서, 경고를 그냥 두거나 @SuppressWarnings("unchecked")  를 추가하여 경고를 숨기곤 했다.
+	- @SafeVarargs 는 제네릭 타입의 가변인자를 사용할 때 나타나는 경고를 숨길 수 있다.
+	- `Effective Java Item32` 에서는 제네릭이나 매개변수화 타입의 varargs 매개변수를 받는 모든 메서드에 `@SafeVarargs` 를 추가하라고 나와있다.
+
+```java
+@SafeVarargs
+static <T> List<T> flatten(List<? extends T>... lists) {
+	List<T> result = new ArrayList<>();
+	for (List<? extends T> list : lists) {
+		result.addAll(list);
+	}
+	return result;
+}
+```
+
+### @FunctioanlInterface
+
+Conceptually, a functional interface has exactly one abstract method. 따라서, FunctionalInteface 를 작성할 때 두 개 이상의 추상 메서드가 정의되지 않도록 `컴파일러가 체킹` 해준다.
+
+```java
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface FunctionalInterface {}
+```
+
+아니 근데 왜.. RetentionPolicy 가 Runtime 으로 되어있을까? 
+
+[StackOverflow. Why does FunctionalInterface have a runtime retetion](https://stackoverflow.com/questions/27121563/why-does-functionalinterface-have-a-runtime-retention) 답변을 참고하면 다음과 같다.
+
+예를 들어 API를 만들고 클래스를 미리 컴파일된 jar로 제공하면 컴파일러에서 더 이상 정보를 사용할 수 없기 때문에 "소스"로는 충분하지 않다.
+
+리플렉션을 사용하여 주석을 찾고 경고도 표시해야 하는 스크립팅 엔진과 같이 런타임에 클래스에 대해 "컴파일"하는 그런 종류의 컴파일러를 지원하려는 경우 "클래스"도 충분하지 않을 것이라고 생각한다.
 
 ## Annotation Processing Tool
 
