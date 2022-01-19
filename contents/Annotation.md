@@ -513,6 +513,56 @@ class AnnotationTest {
 
 누군가 어노테이션은 상속 가능하냐라고 물으면, `@Inherited` 가 적용되었는지에 따라 답변하면 될 것 같다.
 
+## Annotation Processing Tool
+
+APT(Annotation Processing Tool) 는 Java 1.5 에서 어노테이션이 추가되었을 때, 같이 추가되고 있던 녀석이다. 어노테이션을 컴파일시에 처리하는 구조이다.
+
+이 녀석에 대한 자료가 너무 부족해서, [oracle docs](https://docs.oracle.com/javase/7/docs/technotes/guides/apt/index.html) 를 보았다.
+
+The apt tool and its associated API contaiined in the `pakcage com.sun.mirror have been deprecated since Java SE 7`. Use the options available in the javac tool and the APIs contained in the packages javax.annotation.processing and javax.lang.model to process annotations.
+
+`The apt tool first runs annotation processors` that can produce new source code and other files. Next, apt can cause compilation of both original and generated source files, thus easing the development cycle.
+
+`JSR 269(Pluggable Annotation Processing API)`, also known as the Language Model API, has two basic pieces: an API that models the Java programming language, and an API for writing annotation processors. This functionality is accessed through new options to the `javac command; by including JSR 269 support`, javac now acts analogously to the apt command in JDK 5.
+
+그리고 이어서 [APT 사용법](https://www.inf.unibz.it/~calvanese/teaching/java-docs/5.0/guide/apt/GettingStarted.html)에 대한 문서를 보았다.
+
+해당 문서에는 아래와 같이 설명이 되어있다.
+
+- 주석 처리기를 작성하려면 다음 네 가지 패키지가 필요합니다.
+- com.sun.mirror.apt : 도구와 상호 작용하기 위한 인터페이스
+- com.sun.mirror.declaration : 필드, 메소드, 클래스 등의 소스 코드 선언을 모델링하기 위한 인터페이스
+- com.sun.mirror.type : 소스 코드에서 찾은 모델 유형에 대한 인터페이스
+- com.sun.mirror.util : 방문자를 포함한 유형 및 선언 처리를 위한 다양한 유틸리티
+
+그런데 oracle docs 에서는 com.sun.mirror 안에 있는 패키지가 Java SE 7 부터 Deprecated 되었다고 한다.(pakcage com.sun.mirror have been deprecated since Java SE 7)
+
+즉, 상위 버전에서는 사용하지 않기를 권장하고 있다는 것이다. 그러면 APT 를 대체할 다른 수단이 생겼다는건데 아래에서 배워보자.
+
+## Pluggable Annotation Processing API : JSR269
+
+Java 1.6 부터 추가된 컴파일시에 어노테이션을 처리하기 위한 구조이다. `Lombok` 같은 곳에서 사용되고 있다.
+
+JSR269 는 `Annotation Processor` 를 사용하여 런타임이 아닌 컴파일 중에 어노테이션을 처리한다.
+Annotation Processor 는 컴파일러의 플러그인에 해당하므로 플러그인 주석 처리라고도 한다.
+
+lombok 이 컴파일 타임에 자바 코드를 생성하는데, lombok 이 `Annotation Processor`를 이용하여 생성하는 것이다. 또한 IDEA 가 코드를 작성할 때 문법 오류를 표시하는 빨간색 밑줄도 이 기능을 통해 구현된다.
+
+> KAPT(Annotation Processing for Kotlin) 또는 Kotlin 의 컴파일도 이 기능을 통해 이루어진다.
+
+Pluggable Annotation Processing API 의 핵심은 Annotation Processor 로, 일반적으로 추상 클래스인 `javax.annotation.processing.AbstractProcessor` 를 상속받아야 한다. 런타임 주석 RetentionPolicy.RUNTIME 과 달리 주석 프로세서는 컴파일 타임 주석, 즉 Java 코드 컴파일 중에 처리되는 `RetentionPolicy.SOURCE` 주석 유형만 처리한다.
+
+### 사용 방법
+
+플러그인 주석 처리 API의 사용 단계는 다음과 같다.
+
+1. Annotation Processor 를 커스텀하여 정의하려면 `javax.annotation.processing.AbstractProcessor` 를 상속하고 프로세스 메소드를 재정의해야 한다.
+2. 커스텀 어노테이션을 만든다. 메타 어노테이션은 `@Retention(RetentionPolicy.SOURCE)`을 지정해야 한다.
+3. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedSourceVersion` 을 사용하여 컴파일된 버전을 지정해야 합니다.
+4. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedOptions`를 사용하여 컴파일 매개변수를 지정하는 선택적 작업.
+
+> [Annotation Processor 를 활용한 @BuilderProperty 만들기 예제](https://www.baeldung.com/java-annotation-processing-builder)
+
 ## Referneces
 
 - https://www.nextree.co.kr/p5864/
