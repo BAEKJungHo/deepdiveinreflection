@@ -110,8 +110,10 @@ public class UserService {
     - 앞으로 사용하지 말 것을 권장하는 대상에게 붙인다.
 - __@SuppressWarnings__
     - 컴파일러의 특정 경고 메시지가 나타나지 않게 해준다.
+    - Effective Java Item 27
 - __@SafeVarargs__
     - 제네릭 타입의 가변인자에 사용한다. (JDK 1.7)
+    - Effective Java Item 32
 - __@FunctionalInterface__
     - 함수형 인터페이스라는 것을 알린다. (JDK 1.8)
 - __@Native__
@@ -193,7 +195,42 @@ public int getDate() {
 
 그럼에도 불구하고 @Deprecated 를 사용하는 이유는 무엇일까?
 
-자바는 `하위 호환성`을 중요하게 여기는데, 과거에 getDate() 를 사용하여 작성된 프로그램이 상위 JDK 버전에서 동작이 안된다면 에러가 발생할 것이다. 따라서, 상위 버전에서 하위 버전에서 사용했던 메서드 등이 Deprecated 되었더라도, 상위 버전에서 정상적으로 동작할 수 있도록 해주며, 상위 버전에서는 더 이상 사용하지 말라는 의미를 담고있다고 보면된다.
+자바는 `하위 호환성`을 중요하게 여기는데, 과거에 getDate() 를 사용하여 작성된 프로그램이 상위 JDK 버전에서 동작이 안된다면 에러가 발생할 것이다. 따라서, 상위 버전에서 하위 버전에서 사용했던 메서드 등이 Deprecated 되었더라도, 상위 버전에서 정상적으로 동작할 수 있도록 해주며, 상위 버전에서는 더 이상 사용하지 말라는 의미를 담고있다고 보면 된다.
+
+### @SuppressWarnings 
+
+비검사 형변환 경고와 같은 `비검사 경고`를 사용하지 않도록 @SuppressWarnings 를 사용하여 설정할 수 있다.
+
+__중요한 점은, @SuppressWarnings("unchecked") 를 사용할 때, 그 경고를 무시해도 안전한 이유를 항상 주석으로 남겨야한다.__
+
+```java
+public String methodA() {
+    // @SupressWarnings 를 사용한 이유
+    @SuppressWarnings("unchecked")
+    // 코드 
+}
+```
+
+비검사 경고는 `ClassCastException` 을 일으킬 수 있는 가능성을 포함하고 있기 때문에, 가급적 비검사 경고를 제외해야 하며, 방법을 찾지 못할 때에만 @SuppressWarnings("unchecked") 를 사용하는 것이 좋다.
+
+### @Safevarargs
+
+- __@Safevarargs__
+	- 자바 7 전에는 제네릭 가변인수 메서드의 작성자가 호출자 쪽에서 발생하는 경고에 대해서 해줄 수 있는 일이 없었다.
+	- 따라서, 경고를 그냥 두거나 @SuppressWarnings("unchecked")  를 추가하여 경고를 숨기곤 했다.
+	- @SafeVarargs 는 제네릭 타입의 가변인자를 사용할 때 나타나는 경고를 숨길 수 있다.
+	- `Effective Java Item32` 에서는 제네릭이나 매개변수화 타입의 varargs 매개변수를 받는 모든 메서드에 `@SafeVarargs` 를 추가하라고 나와있다.
+
+```java
+@SafeVarargs
+static <T> List<T> flatten(List<? extends T>... lists) {
+	List<T> result = new ArrayList<>();
+	for (List<? extends T> list : lists) {
+		result.addAll(list);
+	}
+	return result;
+}
+```
 
 ## @ComponentScan 을 통한 메타 어노테이션 알아보기
 
