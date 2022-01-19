@@ -535,7 +535,7 @@ The apt tool and its associated API contaiined in the `pakcage com.sun.mirror ha
 - com.sun.mirror.type : 소스 코드에서 찾은 모델 유형에 대한 인터페이스
 - com.sun.mirror.util : 방문자를 포함한 유형 및 선언 처리를 위한 다양한 유틸리티
 
-그런데 oracle docs 에서는 com.sun.mirror 안에 있는 패키지가 Java SE 7 부터 Deprecated 되었다고 한다.(pakcage com.sun.mirror have been deprecated since Java SE 7)
+그런데 oracle docs 에서는 com.sun.mirror 안에 있는 패키지가 Java SE 7 부터 Deprecated 되었다고 한다. (pakcage com.sun.mirror have been deprecated since Java SE 7)
 
 즉, 상위 버전에서는 사용하지 않기를 권장하고 있다는 것이다. 그러면 APT 를 대체할 다른 수단이 생겼다는건데 아래에서 배워보자.
 
@@ -557,9 +557,9 @@ Pluggable Annotation Processing API 의 핵심은 Annotation Processor 로, 일�
 플러그인 주석 처리 API의 사용 단계는 다음과 같다.
 
 1. Annotation Processor 를 커스텀하여 정의하려면 `javax.annotation.processing.AbstractProcessor` 를 상속하고 프로세스 메소드를 재정의해야 한다.
-2. 커스텀 어노테이션을 만든다. 메타 어노테이션은 `@Retention(RetentionPolicy.SOURCE)`을 지정해야 한다.
-3. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedSourceVersion` 을 사용하여 컴파일된 버전을 지정해야 합니다.
-4. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedOptions`를 사용하여 컴파일 매개변수를 지정하는 선택적 작업.
+2. 커스텀 어노테이션을 만든다. 메타 어노테이션은 `@Retention(RetentionPolicy.SOURCE)` 을 지정해야 한다.
+3. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedSourceVersion` 을 사용하여 컴파일된 버전을 지정해야 한다.
+4. 선언된 사용자 정의 어노테이션 프로세서에서 `javax.annotation.processing.SupportedOptions` 를 사용하여 컴파일 매개변수를 지정할 수 있다.
 
 > [Annotation Processor 를 활용한 @BuilderProperty 만들기 예제](https://www.baeldung.com/java-annotation-processing-builder)
 
@@ -567,3 +567,11 @@ Pluggable Annotation Processing API 의 핵심은 Annotation Processor 로, 일�
 
 - https://www.nextree.co.kr/p5864/
 - https://ahnyezi.github.io/java/javastudy-12-annotation/
+- https://catch-me-java.tistory.com/49
+- https://www.baeldung.com/google-autoservice
+- https://www.inf.unibz.it/~calvanese/teaching/java-docs/5.0/guide/apt/GettingStarted.html
+- https://qiita.com/opengl-8080/items/beda51fe4f23750c33e9
+- [JSR269 : Pluggable Annotation Processing API](https://jcp.org/en/jsr/detail?id=269)
+- http://hannesdorfmann.com/annotation-processing/annotationprocessing101/
+- https://pluu.github.io/blog/android/2015/12/24/annotation-processing-api/
+- https://programmer.group/pluggable-annotation-processing-api.html
