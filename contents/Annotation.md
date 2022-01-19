@@ -563,7 +563,9 @@ Conceptually, a functional interface has exactly one abstract method. 따라서,
 public @interface FunctionalInterface {}
 ```
 
-아니 근데 왜.. RetentionPolicy 가 RUNTIME 으로 되어있을까? 
+아니 근데 왜 ?! RetentionPolicy 가 RUNTIME 으로 되어있을까? 
+
+![IMAGES](./images/jjangguwhy.png)
 
 [StackOverflow. Why does FunctionalInterface have a runtime retetion](https://stackoverflow.com/questions/27121563/why-does-functionalinterface-have-a-runtime-retention) 답변을 참고하면 다음과 같다.
 
