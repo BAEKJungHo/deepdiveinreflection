@@ -14,10 +14,10 @@ class AnnotationTest {
     void inheritedTest() {
         Class<User> userClass = User.class;
         log.info("User Dto Annotation = {}", userClass.getAnnotation(Dto.class));
-        log.info("User Dto Annotation = {}", userClass.getAnnotation(Dao.class));
+        log.info("User Dao Annotation = {}", userClass.getAnnotation(Dao.class));
 
         Class<Team> teamClass = Team.class;
-        log.info("User Dto Annotation = {}", teamClass.getAnnotation(Dto.class));
-        log.info("User Dto Annotation = {}", teamClass.getAnnotation(Dao.class));
+        log.info("Team Dto Annotation = {}", teamClass.getAnnotation(Dto.class));
+        log.info("Team Dao Annotation = {}", teamClass.getAnnotation(Dao.class));
     }
 }
