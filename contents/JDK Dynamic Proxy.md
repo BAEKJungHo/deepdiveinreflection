@@ -126,8 +126,8 @@ public class ConcreteC {
 ```java
 @Test
 void concreteTest() {
-    ConcreteC concreteC = new ConcreteC();
-    TimeInvocationHandler handler = new TimeInvocationHandler(concreteC);
+    ConcreteC target = new ConcreteC();
+    TimeInvocationHandler handler = new TimeInvocationHandler(target);
 
     ConcreteC proxy = (ConcreteC) Proxy.newProxyInstance(ConcreteC.class.getClassLoader(), new Class[]{ConcreteC.class}, handler);
 
@@ -148,6 +148,28 @@ java.lang.IllegalArgumentException: reflection.study.dynamicproxy.code.ConcreteC
 	at java.base/java.lang.reflect.Proxy$ProxyBuilder.<init>(Proxy.java:635)
 
   // 생략
+```
+
+- 올바른 테스트 코드
+
+```java
+@Test
+void concreteTest() {
+ConcreteC target = new ConcreteC();
+TimeInvocationHandler handler = new TimeInvocationHandler(target);
+assertThatThrownBy(() ->
+	    Proxy.newProxyInstance(ConcreteC.class.getClassLoader(), new Class[]{ConcreteC.class}, handler))
+	.isInstanceOf(IllegalArgumentException.class);
+}
+```
+
+## 실행 순서 정리
+
+```
+Client -> call() 
+-> `$proxy1`(동적 프록시 객체) 
+-> handler.invoke() -> InvocationHandler 구현체
+-> method.invoke -> 인터페이스 구현체의 메서드 호출(Ex. call())
 ```
 
 ## References
