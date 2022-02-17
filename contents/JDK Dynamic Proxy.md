@@ -172,6 +172,23 @@ Client -> call()
 -> method.invoke -> 인터페이스 구현체의 메서드 호출(Ex. call())
 ```
 
+## 장점
+
+JDK Dynamic Proxy 을 도입함으로써 무슨 장점이 있을까?
+
+- __도입 전__
+	- 인터페이스 만큼(Ex. AInterface, BInteface ...) 프록시 객체를 `직접 생성`해줘야 한다.
+- __도입 후__
+	- JDK Dynamic Proxy 가 알아서 생성해 준다.
+
+![jdkdynamic](https://user-images.githubusercontent.com/47518272/154453994-ba0a9fbf-9a95-4aac-86b3-6314dcafa5d7.png)
+
+## 한계
+
+JDK Dynamic Proxy 는 `인터페이스`가 필수이다. 만약에, 인터페이스 없이 클래스만 존재하는 경우에는 어떻게 동적 프록시를 적용해야 할까?
+
+이러한 한계를 극복하고자 바이트 코드를 조작는 `CGLIB` 라이브러리를 사용해야 한다. 
+
 ## References
 
 - [Proxy (Java Plaform SE 8)](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html)
