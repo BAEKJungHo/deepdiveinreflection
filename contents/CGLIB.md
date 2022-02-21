@@ -4,6 +4,10 @@
 
 - CGLIB 은 바이트코드를 조작해서 동적으로 클래스를 생성하는 기술을 제공하는 라이브러리이다.
 - CGLIB 은 JDK Dynamic Proxy 와 달리 인터페이스 없이, 구체 클래스만 가지고 동적 프록시를 생성할 수 있다.
+- CGLIB는 구체 클래스를 상속(extends)해서 프록시를 만든다.
+    - 따라서, 상속에 의한 제약조건이 생긴다.
+    - CGLIB는 자식 클래스를 동적으로 생성하기 때문에 기본 생성자가 필요하다.
+    - 클래스 혹은 메서드에 final 이 붙으면 안된다.
 - CGLIB 은 외부 라이브러리이지만, 스프링 프레임워크가 스프링 내부 소스 코드에 포함했다. 따라서, 스프링을 사용하는 경우 별도의 라이브러리를 추가할 필요 없이 사용할 수 있다.
 
 ![cglib](https://user-images.githubusercontent.com/47518272/154974123-265cc984-840a-4ef5-9736-4aef895f9c36.png)
@@ -79,17 +83,28 @@ public class TimeMethodInterceptor implements MethodInterceptor {
 void cglib() {
     ConcreteC target = new ConcreteC();
 
+    // Enhancer 가 CGLIB Proxy 를 만든다.
     Enhancer enhancer = new Enhancer();
+    
+    // CGLIB 는 구체 클래스를 상속 받아서 프록시를 생성할 수 있다.
+    // 어떤 구체 클래스를 상속 받을지 정한다.
     enhancer.setSuperclass(ConcreteC.class);
+    
+    // // 프록시에 적용할 실행 로직을 할당한다.
     enhancer.setCallback(new TimeMethodInterceptor(target));
+    
+    // 프록시 생성
+    // ConcreteC$$EnhancerByCGLIB$$860aca8f@2209
     ConcreteC proxy = (ConcreteC) enhancer.create();
-    log.info("targetClass={}", target.getClass());
-    log.info("proxyClass={}", proxy.getClass());
+    
+    log.info("targetClass={}", target.getClass()); // targetClass=class reflection.study.dynamicproxy.code.ConcreteC
+    log.info("proxyClass={}", proxy.getClass()); // proxyClass=class reflection.study.dynamicproxy.code.ConcreteC$$EnhancerByCGLIB$$860aca8f
 
     proxy.call();
-
 }
 ```
+
+![CGLIB2](https://user-images.githubusercontent.com/47518272/154981191-ced061f4-9b99-437b-beb2-d7c038cd2567.png)
 
 ## References 
 
