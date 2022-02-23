@@ -9,6 +9,7 @@
     - CGLIB는 자식 클래스를 동적으로 생성하기 때문에 기본 생성자가 필요하다.
     - 클래스 혹은 메서드에 final 이 붙으면 안된다.
 - CGLIB 은 외부 라이브러리이지만, 스프링 프레임워크가 스프링 내부 소스 코드에 포함했다. 따라서, 스프링을 사용하는 경우 별도의 라이브러리를 추가할 필요 없이 사용할 수 있다.
+- [성능 차이 분석 표](https://web.archive.org/web/20150520175004/https://docs.codehaus.org/display/AW/AOP+Benchmark)
 
 ![cglib](https://user-images.githubusercontent.com/47518272/154974123-265cc984-840a-4ef5-9736-4aef895f9c36.png)
 
