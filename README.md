@@ -15,8 +15,8 @@
 - [스프링 DI 가 동작하는 원리](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/%EC%8A%A4%ED%94%84%EB%A7%81%20DI%20%EA%B0%80%20%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94%20%EC%9B%90%EB%A6%AC.md)
 - [JDK Dynamic Proxy](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/JDK%20Dynamic%20Proxy.md)
 - [CGLIB](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/CGLIB.md)
+- [AOP](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/AOP.md)
 - 스프링 데이터 JPA 가 동작하는 원리
-- 스프링의 ProxyFactory
 
 ## References
 
