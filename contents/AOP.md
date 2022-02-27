@@ -102,7 +102,93 @@ class ProxyFactoryTest {
   - Pointcut + Advice 한쌍을 의미
   - Advisor 는 `어떤 부가 기능 로직`을 `어디에` 적용할지를 알고 있다.
 
-> AOP 의 핵심은 역할과 책임을 잘 구분하는 것이다. Pointcut 은 필터링 로직만 담당하고, Advice 는 부가 기능 로직만 담당한다.
+> AOP 의 핵심은 역할과 책임을 잘 구분하는 것이다.(핵심 기능과 부가 기능을 분리하는 것) Pointcut 은 필터링 로직만 담당하고, Advice 는 부가 기능 로직만 담당한다.
+
+### 다양한 포인트컷
+
+- __AspectJExpressionPointcut__
+  - spectJ 표현식으로 매칭한다.
+  - 실무에서 가장 많이 사용되는 포인트컷이다. 
+  - ```java
+    @Pointcut("execution(public * come.weave..repository.*.*(..))")
+    public void webLog(){}
+
+    @Around("webLog()")
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        // 스톱워치로 시간 측정
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        
+        // 생략
+    }
+    ```
+- __NameMatchMethodPointcut__
+  - 메서드 이름을 기반으로 매칭한다. 내부에서는 PatternMatchUtils 를 사용한다.
+- __JdkRegexpMethodPointcut__
+  - JDK 정규 표현식을 기반으로 포인트컷을 매칭한다.
+- __TruePointcut__
+  - 항상 참을 반환한다.
+- __AnnotationMatchingPointcut__
+  - 어노테이션으로 매칭한다.
+
+## @Aspect
+
+- 스프링은 `@Aspect` 어노테이션으로 Advisor 생성을 지원한다.
+- @Aspect 는 관점 지향 프로그래밍(AOP)을 가능하게 하는 AspectJ 프로젝트에서 제공하는 어노테이션이다.
+- @Aspect 를 통해서 스프링이 알아서 프록시를 생성해 주는 것이다.
+
+```java
+@Slf4j
+@Aspect
+public class LogTraceAspect {
+ 
+ private final LogTrace logTrace;
+ 
+ public LogTraceAspect(LogTrace logTrace) {
+    this.logTrace = logTrace;
+ }
+ 
+ // Advisor
+ @Around("execution(* hello.proxy.app..*(..))")
+ public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
+   TraceStatus status = null;
+   
+   // log.info("target={}", joinPoint.getTarget()); // 실제 호출 대상
+   // log.info("getArgs={}", joinPoint.getArgs()); // 전달인자
+   // log.info("getSignature={}", joinPoint.getSignature()); // join point 시그니처
+   
+   try {
+       String message = joinPoint.getSignature().toShortString();
+       status = logTrace.begin(message);
+       
+       // 로직 호출
+       Object result = joinPoint.proceed();
+       
+       logTrace.end(status);
+       return result;
+     } catch (Exception e) {
+       logTrace.exception(status, e);
+       throw e;
+     }
+   }
+}
+```
+
+- `@Around` 는 target 로직 실행 전, 후에 적용된다.
+- AOP 를 빈으로 등록하기 위해서는 ComponentScan 방법을 쓰거나, 수동 빈으로 등록하면 된다.
+
+![advisor](https://user-images.githubusercontent.com/47518272/155872536-d4edffa5-0b44-4ec1-9d37-1a97b1c75bc5.png)
+
+## 횡단 관심사(cross-cutting concerns)
+
+- 횡단 관심사(cross-cutting concerns) 는 애플리케이션의 여러 기능들 사이에 적용되는 부가 기능 로직을 말한다.
+  - Ex. Log 를 남기는 기능은 `3 Layer Architectures` 전반에 걸쳐서 동작 되어야 한다.
+
+## AOP 
+
+- 스프링은 하나의 프록시에 여러 Advisor 를 적용할 수 있도록 해준다. 따라서, target 에 여러 AOP 가 동시에 적용되더라도, 스프링 AOP 는 target 마다 하나의 프록시만 생성한다.
+- AOP 는 OOP 를 대체하기 위한 것이 아니라 횡단 관심사를 깔끔하게 처리하기 어려운 OOP 의 부족한 부분을 보조하는 목적으로 개발되었다.
+- 실무에서는 AOP 를 구현하기 위해 `AspectJ 프레임워크`를 주로 사용한다.
 
 ## References
 
