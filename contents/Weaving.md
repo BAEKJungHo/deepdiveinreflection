@@ -53,23 +53,32 @@ AOP 는 `위빙(Weaving)` 이라는 방법을 사용하여 부가 기능 로직(
   - 그런데 스프링에서는 AspectJ가 제공하는 애노테이션이나 관련 인터페이스만 사용하는 것이고, 실제 AspectJ 가 제공하는 컴파일, 로드타임 위버 등을 사용하는 것은 아니다.
   - ![starteraop](https://user-images.githubusercontent.com/47518272/156457054-e392e0ea-ca48-4183-9e9a-0d4bbd4983c6.png)
 
-## AspectJ 에서 제공하는 LTW 를 사용하려면?
+## AspectJ 에서 제공하는 LTW 는 언제 활용될까?
 
 - __LTW 는 언제 활용되는 것일까?__
   - `@Configurable 지원`
     - [@Configurable 활용 사례는 해당 링크를 통해 확인하자](https://dhsim86.github.io/web/2019/05/21/spring_@configurable-post.html)
     - 해당 아티클 내용을 보면 스프링에서 `DDD` 개념을 도입하는 경우 @Configurable 을 사용한다고 나와있다. 
+    - 해당 아티클 Domain 객체 내부에 Repository 가 들어가 있는 것을 볼 수 있는데, 이러한 패턴을 [Active Record](https://martinfowler.com/eaaCatalog/activeRecord.html) 라고 부른다.
+    - 자세한 내용이 궁금하면 martinfowler 의 [P of EAA](https://www.martinfowler.com/books/eaa.html) 를 참고하자.
+    - 그러면 Hibernate JPA 를 사용할 때 쓰는 패턴은 이름이 뭘까 찾아봤는데, [Data Mapper](https://martinfowler.com/eaaCatalog/dataMapper.html) 라고 부른다.
     > 지금 당장 깊게 보기보단, 실무에서 DDD 를 사용 중이라면 그 때 깊게 공부하면 될 것 같다.
   - `트랜잭션 AOP 모드를 AspectJ 로 설정한 경우`
     - `<tx:annotation-driven mode="aspectj"/>`
     - 이 경우에 LTW 를 사용한다.
   - `AspectJ 가 아니라 JPA 에서 필요로 하는 LTW 로 사용되는 경우`
     - JPA 의 구현체에 따라서 다르지만 대부분 LTW 를 이용한 바이트코드 조작을 필요로 한다.
+    - POJO 로 만든 도메인 객체에 지연된 로딩이나 변경 감지, 그룹 조회, JOIN 을 이용한 로딩 및 최적화 기능을 적용하려면 POJO 클래스의 바이트코드를 조작해야 한다. 이를 위해 JPA 는 각 구현체마다 전용 로드 타임 위버를 제공한다.
+      - Ex. EclipseLink 는 eclipselink.jar 파일을 javaagent 로 설정해서 LTW 를 적용한다.
+      - __독자적인 방식을 사용하는 Hibernate JPA 를 제외하면 대부분 JPA 구현체는 LTW 를 사용하도록 요구하고 있다.__
 
+> 더 자세한 내용이 궁금하다면 [토비의 스프링3 2편, 5장. AOP 와 LTW](http://www.yes24.com/Product/Goods/4020006) 를 참고하자.
 
 ## References 
 
 - https://github.com/spring-projects/spring-boot/issues/739
+- https://martinfowler.com/eaaCatalog/
+- https://groups.google.com/g/ksug/c/s7h0ONB8tcI
 - https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/aop.html
 - [인프런. 스프링 핵심원리 고급](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B3%A0%EA%B8%89%ED%8E%B8/dashboard)
-- [토비의 스프링 3](#)
+- [토비의 스프링 3](http://www.yes24.com/Product/Goods/4020006)
