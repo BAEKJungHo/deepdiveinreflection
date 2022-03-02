@@ -19,7 +19,7 @@ AOP 는 `위빙(Weaving)` 이라는 방법을 사용하여 부가 기능 로직(
 - 자바를 실행하면 자바 언어는 .class 파일을 JVM 내부의 클래스 로더에 보관한다.
 - 이때 중간에서 .class 파일을 조작한 다음 JVM 에 올릴 수 있다.
 - __자바 언어는 .class 를 JVM 에 저장하기 전에 조작할 수 있는 기능을 제공한다.__
-  - `java Instrumentation`
+  - JVM 이 제공하는 [Java Instrumentation API](https://www.baeldung.com/java-instrumentation) 를 활용하여 JVM 에 로드된 기존 바이트 코드를 변경한다.
 - 이 시점에 Aspect 를 적용하는 것을 LTW 라고 한다.
 
 > 수 많은 모니터링 툴들이 이 방식을 사용한다.
@@ -71,6 +71,9 @@ AOP 는 `위빙(Weaving)` 이라는 방법을 사용하여 부가 기능 로직(
     - POJO 로 만든 도메인 객체에 지연된 로딩이나 변경 감지, 그룹 조회, JOIN 을 이용한 로딩 및 최적화 기능을 적용하려면 POJO 클래스의 바이트코드를 조작해야 한다. 이를 위해 JPA 는 각 구현체마다 전용 로드 타임 위버를 제공한다.
       - Ex. EclipseLink 는 eclipselink.jar 파일을 javaagent 로 설정해서 LTW 를 적용한다.
       - __독자적인 방식을 사용하는 Hibernate JPA 를 제외하면 대부분 JPA 구현체는 LTW 를 사용하도록 요구하고 있다.__
+      - EclipseLink 의 Weaving 이나 OpenJPA 의 enhancement process 의 목적 중 하나는 `지연 로딩의 최적화`이다.
+      - Hibernate 는 `hibernate.default_batch_fetch_size` 를 사용하여 지연 로딩을 최적화한다.
+      - [참고. JPA performance optimization](https://dzone.com/articles/jpa-performance-optimization)
 
 > 더 자세한 내용이 궁금하다면 [토비의 스프링3 2편, 5장. AOP 와 LTW](http://www.yes24.com/Product/Goods/4020006) 를 참고하자.
 
