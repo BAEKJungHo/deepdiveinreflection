@@ -192,7 +192,7 @@ public class LogTraceAspect {
 
 ## @ControllerAdvice
 
-- @ControllerAdvice 는 특정 컨트롤러에서 발생하는 예외 처리와 같은 작업을 전역적으로 처리할 수 있게 해준다.
+- __@ControllerAdvice 는 특정 컨트롤러에서 발생하는 예외 처리와 같은 작업을 전역적으로 처리할 수 있게 해준다.__
   - 즉, @ControllerAdvice 와 @ExceptionHandler 를 통해서, 기존 컨트롤러에서 처리되어야하는 `API 예외` 를 `Advice(부가 기능 로직)` 로 판단하여, 별도의 클래스에서 관리할 수 있다.
 - __Advice 에서 알 수 있듯이, AOP 를 사용한다.__
 - __Controller 에서 알 수 있듯이, Controller 를 대상으로 한다.__
