@@ -3,7 +3,8 @@
 ## 🎯 Goals
 
 - Java Reflection 에 대한 이해를 바탕으로 스프링의 어떤 기술에 적용이 되어있는지, 어떤 식으로 동작하는지에 대한 원론적인 고민을 해소하자
-  - Java Reflection 을 제대로 이해하기 위해 JVM Architecture 에 대해서 깊게 이해하자.
+- Java Reflection 을 제대로 이해하기 위해 JVM Architecture 에 대해서 깊게 이해하자.
+- Reflection 에 대한 이해를 바탕으로 Proxy 와 AOP 를 이해하자.
 
 ## 📚 Table of Contents
 
