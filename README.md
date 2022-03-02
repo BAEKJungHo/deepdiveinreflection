@@ -16,6 +16,7 @@
 - [JDK Dynamic Proxy](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/JDK%20Dynamic%20Proxy.md)
 - [CGLIB](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/CGLIB.md)
 - [AOP](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/AOP.md)
+- [Weaving](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Weaving.md)
 - 스프링 데이터 JPA 가 동작하는 원리
 
 ## References
