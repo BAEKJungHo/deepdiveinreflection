@@ -205,6 +205,31 @@ public class LogTraceAspect {
   - @ControllerAdvice("com.reflectoring.controller")
   - @ControllerAdvice(annotations = Advised.class)
 
+### 동작 과정
+
+> 스프링에서 Handler(Controller) 와 HandlerMethod 를 찾는 역할을 DispatcherServlet 을 통해 HandlerMapping, HandlerAdapter 를 통해 진행한다.
+
+- __에러가 발생하면 DispatcherServlet 의 processHandlerException() 메서드가 동작한다.__
+  - ![dispatcherservletex](https://user-images.githubusercontent.com/47518272/156379370-fe8572bc-643e-42c2-abed-1a1f962a6487.png)
+  - 그리고 HandlerExceptionResolver 에는 아래와 같이 여러 Resolver 들이 담겨있다. 적절한 Resolver 를 선택해서 예외 처리를 하겠구나라는 감이 올 것이다.
+  - ![handlerExceptionResolver](https://user-images.githubusercontent.com/47518272/156379497-96e73136-5cca-4cd1-a683-8028b76d4453.png)
+  - exMv = resolver.resolveException(request, response, handler, ex); 를 실행한다.
+- __HandlerExceptionResovlerComposite 의 resolveException() 메서드가 동작한다.__
+  - ![handlerExceptionResolverComposite](https://user-images.githubusercontent.com/47518272/156379898-d5948e4a-04b2-4544-a54c-3df247de1b43.png)
+- __AbstractHandlerExceptionResolver 의 resolveException() 메서드가 동작한다.__
+  - ![abstractHandlerExResolver](https://user-images.githubusercontent.com/47518272/156380132-2c9d324c-a9cc-4000-95b5-3bceaa7ce0e8.png)
+- __AbstractHandleMethodExceptionResolver 의 doResolveException() 메서드가 동작한다.__
+  - ![abstractHandlermethodExResolver](https://user-images.githubusercontent.com/47518272/156380408-47e330c8-d9c3-4ed3-ba24-04ee39993ff3.png)
+- __ExceptionHandlerExceptionResolver 의 doResolveHandlerMethodException() 메서드가 동작한다.__
+  - ![exhandlerexresolver](https://user-images.githubusercontent.com/47518272/156380486-b40ac6e3-2aae-44cc-a08e-bf6dab58229f.png)
+- __ServletInvocableHandlerMethod 의 invokeAndHandle() 메서드가 동작한다.__
+  - ![servletInvocable](https://user-images.githubusercontent.com/47518272/156380683-96ea9177-8b68-4b4b-b807-d4f579b2e396.png)
+- __InvocationHandlerMethod 의 doInvoke() 메서드가 동작한다.__
+  - ![invocationhandlermethod1](https://user-images.githubusercontent.com/47518272/156380779-36a9e2c2-62a1-44f0-ba2c-0bf7e0a23167.png)
+  - ![invocationhandlermethod2](https://user-images.githubusercontent.com/47518272/156380791-e4fc8c1e-5fc9-4149-af6f-21c7c183172e.png)
+  - ![invocationhandlermethod3](https://user-images.githubusercontent.com/47518272/156380817-fb5f6efb-bb54-41dc-a220-cf0e7d1c3c90.png)
+  - ![invocationhandlermethod4](https://user-images.githubusercontent.com/47518272/156380831-e0ddf2c7-9b3c-4cd5-a9e0-1e474a87e658.png)
+
 ## References
 
 - [인프런. 스프링 핵심 원리 고급](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B3%A0%EA%B8%89%ED%8E%B8/dashboard)
