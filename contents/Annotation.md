@@ -625,12 +625,12 @@ Pluggable Annotation Processing API 의 핵심은 Annotation Processor 로, 일�
 
 ## RetentionPolicy CLASS 정책이 필요한 이유
 
-- 사용 예
+- __사용 예__
   - `Lombok 의 @NonNull`
-- CLASS 정책이 필요한 이유
+- __CLASS 정책이 필요한 이유__
   - Maven/Gradle로 다운받은 라이브러리와 같이 jar 파일에는 소스가 포함되어있지 않다는 점이다. class 파일만 포함되어있다 (Download Sources 옵션은 논외)
   - 즉, class 파일만 존재하는 라이브러리 같은 경우에도 타입체커, IDE 부가기능 등을 사용할수 있으려면 CLASS 정책이 필요하게 된다. SOURCE 정책으로 사용한다면 컴파일된 라이브러리의 jar 파일에는 어노테이션 정보가 남아있지 않기 때문이다.
-  - 그외에도 클래스 로딩 시 무언가를 하고 싶은 경우에도 사용될 수도 있다.
+  - 그 외에도 클래스 로딩 시 무언가를 하고 싶은 경우에도 사용될 수도 있다.
 
 ## @Inherited 가 적용된 어노테이션
 
