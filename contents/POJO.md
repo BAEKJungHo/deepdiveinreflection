@@ -3,6 +3,40 @@
 - [Martinfowler](https://martinfowler.com/bliki/POJO.html). POJO 는 애플리케이션 핵심 코드를 작성할 때, EJB 기술을 사용하지 말고 일반 자바 객체로 작성하자라는 것이 전부이다. 
 - [토비의 스프링](#). POJO 는 객체지향적 원리에 충실하고, 특정 규약과 환경에 종속되지 않게 재활용될 수 있는 방식으로 설계된 객체이다.
   - 특정 기술과 규약, 환경에서 자유롭기 때문에 객체지향적인 설계를 자유롭게 적용할 수 있다. 그래서 자동화된 테스트에 유리하며, 유지보수성과 확장성이 좋아진다.
+- [Rod Johnson](#). OO design is more important than any particular implementation technology (such as J2EE, or even Java). Good Programming practices and sound OO design underpin good J2EE applications. Bad Java code is bad J2EE code.
+
+> POJO 방식으로 개발을 했다면 `반드시 테스트를 작성`해야 하며, 그래야 POJO 를 POJO 답게 쓰게하고 그 가치를 누릴 수 있다. 
+> 
+> 토비의 스프링 저자. 이일민
+
+## POJO 란 ? 
+
+- 특정 프레임워크에 대한 참조가 없는 간단한 유형
+
+```java
+public class EmployeePojo {
+
+    public String firstName;
+    public String lastName;
+    private LocalDate startDate;
+
+    public EmployeePojo(String firstName, String lastName, LocalDate startDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.startDate = startDate;
+    }
+
+    public String name() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public LocalDate getStart() {
+        return this.startDate;
+    }
+}
+```
+
+이 클래스는 프레임워크에 연결되지 않으므로 모든 Java 프로그램에서 사용할 수 있다.
 
 ## POJO 객체로 작성해야하는 이유
 
@@ -34,8 +68,9 @@ EJB 의 중심에는 분산 컴퓨팅기술이 있다. 이를 통해 여러 서�
 
 __애플리케이션 코드가 특정 기술에 종속적이지 않도록(`비침투적`) 하는 것이 스프링의 철학이며, POJO 를 사용해 엔터프라이즈 애플리케이션을 쉽고 효과적으로 개발할 수 있도록 지원해주는 데 있다.__
 
-> 스프링이 단순한 프레임워크가 아닌 플랫폼으로 발전했다는 사실과 그럼에도 `초기 스프링의 철학은 여전히 유효하고 더욱 강조`돼야 하며
-> `스프링 자체 보다 중요`하다. by KSUS(한국 스프링 사용자 모임) 3대 큰일꾼 박성철
+> 스프링이 단순한 프레임워크가 아닌 플랫폼으로 발전했다는 사실과 그럼에도 `초기 스프링의 철학은 여전히 유효하고 더욱 강조`돼야 하며 `스프링 자체 보다 중요`하다. 
+> 
+> KSUS(한국 스프링 사용자 모임) 3대 큰일꾼 박성철
 
 ## 스프링이 POJO 방식의 개발을 돕기 위해 제공하는 기술들
 
@@ -46,5 +81,5 @@ __애플리케이션 코드가 특정 기술에 종속적이지 않도록(`비�
 
 ## References
 
-- [토비의 스프링 3](#)
+- [토비의 스프링 3](http://www.yes24.com/Product/Goods/4020006)
 - [당신의 코드는 POJO하신가요?](https://www.youtube.com/watch?v=5NcqgXgmmjg)
