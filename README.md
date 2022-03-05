@@ -9,7 +9,6 @@
 3. Reflection 에 대한 이해를 바탕으로 Annotation 을 다시 공부해보자.
 4. POJO 와 스프링의 철학에 대해 이해하자.
 5. 스프링의 3대 핵심 기술에 대해서 공부하자.
-  - IoC/DI, AOP, PSA
 
 ## 📚 Table of Contents
 
