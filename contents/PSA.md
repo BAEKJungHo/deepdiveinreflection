@@ -10,6 +10,77 @@
 - __특정 세부적인 기술에 종속되지 않게 해준다.__
 - __테스트가 어렵게 만들어진 api 나 설정을 통해 주요 기능을 외부에서 제어하게 만들고 싶은 경우 사용할 수 있다.__
 
+## PSA 적용하기
+
+### 기존 코드
+
+```java
+public class RepositoryRank {
+
+  public int getPoint(String repositoryName) throws IOException {
+    GitHub github = GitHub.connect();
+    GHRepository repository = github.getRepository(repositoryName);
+    
+    int points = 0;
+    if (repository.hasIssues()) {
+      points += 1;
+    }
+    
+    if (repository.getReadme() != null) {
+      points += 1;
+    }
+  
+    // 생략
+  }
+}
+```
+
+현재 getPoint() 메서드는 테스트하기 어려운 상태이다. 
+
+바로 getPoint() 내부에서 GitHub API 를 호출하기 때문이다. 실제로 테스트할 때마다 API 를 매번 호출하게 할 것인가? 
+
+API 를 매번호출하게 되면 GitHub API 자체에 제한이 있을 수도 있고, API 를 호출하는 과정에서 실패가 일어날 수도 있으며, 속도도 느릴 것이다.
+
+이러한 문제를 PSA 를 사용하여 해결할 수 있다.
+
+### 리팩토링
+
+`GitHub github = GitHub.connect()` 부분을 추상화하는 것이다.
+
+```java
+interface GitHubService {
+  GitHub connect();
+}
+```
+```java
+public class DefaultGitHubService implements GitHubService {
+  @Override
+  public GitHub connect() {
+    return GitHub.connect();
+  }
+}
+```
+```java
+public class RepositoryRank {
+
+  private final GitHubService gitHubService;
+  
+  public RepositoryRank(final GitHubService gitHubService) {
+    this.gitHubService = gitHubService;
+  }
+
+  public int getPoint(String repositoryName) throws IOException {
+    GitHub github = gitHubService.connect();
+    GHRepository repository = github.getRepository(repositoryName);
+    
+    // 생략
+  }
+}
+```
+
+PSA 를 적용하여 리팩토링 하였더니 `테스트하기 쉬운 코드`가 되었다.
+
 ## References
 
 - [토비의 스프링 3](#)
+- [스프링 제대로 공부했는가?](https://www.youtube.com/watch?v=bJfbPWEMj_c&t=12s)
