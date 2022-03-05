@@ -17,13 +17,13 @@
 - [Java Reflection](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Java%20Reflection.md)
 - [Annotation](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Annotation.md)
 - [POJO 와 스프링의 철학](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/POJO.md)
-- [[스프링 3대 핵심 기술]. DI](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/%EC%8A%A4%ED%94%84%EB%A7%81%20DI%20%EA%B0%80%20%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94%20%EC%9B%90%EB%A6%AC.md)
+- [[스프링 3대 핵심 기술] DI](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/%EC%8A%A4%ED%94%84%EB%A7%81%20DI%20%EA%B0%80%20%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94%20%EC%9B%90%EB%A6%AC.md)
 - [Proxy Pattern](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Proxy%20Pattern.md)
 - [JDK Dynamic Proxy](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/JDK%20Dynamic%20Proxy.md)
 - [CGLIB](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/CGLIB.md)
-- [[스프링 3대 핵심 기술]. AOP](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/AOP.md)
+- [[스프링 3대 핵심 기술] AOP](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/AOP.md)
 - [Weaving](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Weaving.md)
-- [[스프링 3대 핵심 기술]. PSA](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/PSA.md)
+- [[스프링 3대 핵심 기술] PSA](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/PSA.md)
 - 스프링 데이터 JPA 가 동작하는 원리
 
 ## References
