@@ -46,4 +46,5 @@ __애플리케이션 코드가 특정 기술에 종속적이지 않도록(`비�
 
 ## References
 
-- [
+- [토비의 스프링 3](#)
+- [당신의 코드는 POJO하신가요?](https://www.youtube.com/watch?v=5NcqgXgmmjg)
