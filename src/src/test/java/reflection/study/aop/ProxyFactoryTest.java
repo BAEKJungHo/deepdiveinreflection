@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import reflection.study.aop.code.TimeAdvice;
 import reflection.study.code.ConcreteService;
 import reflection.study.code.ServiceImpl;
@@ -13,7 +12,6 @@ import reflection.study.code.ServiceInterface;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ControllerAdvice
 @Slf4j
 class ProxyFactoryTest {
 
