@@ -1,4 +1,4 @@
-# Deep Dive In Java Reflection
+# Deep Dive In Reflection
 
 ## 🎯 Goals
 
