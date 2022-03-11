@@ -3,7 +3,7 @@
 - [Martinfowler](https://martinfowler.com/bliki/POJO.html). POJO 는 애플리케이션 핵심 코드를 작성할 때, EJB 기술을 사용하지 말고 일반 자바 객체로 작성하자라는 것이 전부이다. 
 - [토비의 스프링](#). POJO 는 객체지향적 원리에 충실하고, 특정 규약과 환경에 종속되지 않게 재활용될 수 있는 방식으로 설계된 객체이다.
   - 특정 기술과 규약, 환경에서 자유롭기 때문에 객체지향적인 설계를 자유롭게 적용할 수 있다. 그래서 자동화된 테스트에 유리하며, 유지보수성과 확장성이 좋아진다.
-- [Rod Johnson](#). OO design is more important than any particular implementation technology (such as J2EE, or even Java). Good Programming practices and sound OO design underpin good J2EE applications. Bad Java code is bad J2EE code.
+- [Rod Johnson](#). OO design is more important than any particular implementation technology (such as J2EE, or even Java). And now important than even Spring or Hibernate. Good Programming practices and sound OO design underpin good J2EE applications. Bad Java code is bad J2EE code.
 
 > POJO 방식으로 개발을 했다면 `반드시 테스트를 작성`해야 하며, 그래야 POJO 를 POJO 답게 쓰게하고 그 가치를 누릴 수 있다. 
 > 
