@@ -24,7 +24,6 @@
 - [[스프링 3대 핵심 기술] AOP](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/AOP.md)
 - [Weaving](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/Weaving.md)
 - [[스프링 3대 핵심 기술] PSA](https://github.com/BAEKJungHo/deepdiveinreflection/blob/main/contents/PSA.md)
-- 스프링 데이터 JPA 가 동작하는 원리
 
 ## References
 
