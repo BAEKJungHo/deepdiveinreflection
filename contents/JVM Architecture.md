@@ -312,6 +312,8 @@ JDK 8 부터 PermGen 영역은 삭제되고, PermGen 영역에 저장되는 애�
 
 PermGen 영역에 존재하던 Static Object 는 Heap 영역으로 옮겨져서 GC 의 대상이 될 수 있도록 하였다.
 
+[JEP 122: Remove the Permanent Generation](https://openjdk.org/jeps/122) - The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap.
+
 ## References
 
 - https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html
