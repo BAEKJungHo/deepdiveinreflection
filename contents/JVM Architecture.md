@@ -314,6 +314,23 @@ PermGen 영역에 존재하던 Static Object 는 Heap 영역으로 옮겨져서 
 
 [JEP 122: Remove the Permanent Generation](https://openjdk.org/jeps/122) - The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap.
 
+## Metaspace
+
+The JVM (Java Virtual Machine) Metaspace area is a part of the Java memory model introduced in Java 8. It replaced the older PermGen (Permanent Generation) space. Metaspace is used to store class metadata, which includes:
+
+- Class information: Class definitions, bytecode, and internal representation of loaded classes.
+- Constant pool: A collection of constants referenced by the bytecode, including literals, symbolic references to types, fields, and methods.
+- Field and method data: Information about the fields and methods of a class, including their names, descriptors, and access flags.
+- Method bytecode: The compiled bytecode for methods in the class.
+- Runtime constant pool: A runtime representation of the constant pool that is used to resolve and cache constant values.
+- Just-In-Time (JIT) compilation data: Information used by the JIT compiler to optimize the bytecode execution.
+- Annotations: Metadata in the form of annotations applied to classes, methods, and fields.
+- Class loader data: Information about the class loader responsible for loading
+
+The Metaspace area is allocated from native memory (outside the Java heap), and its size can be dynamically adjusted by the JVM based on the application's needs. This makes it more flexible than the older PermGen space, which had a fixed maximum size.
+
+To monitor and control the Metaspace size, you can use JVM options such as -XX:MetaspaceSize, -XX:MaxMetaspaceSize, and -XX:MinMetaspaceFreeRatio. Garbage collection of the Metaspace area occurs when classes are unloaded, typically when their associated class loaders are no longer in use.
+
 ## References
 
 - https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html
